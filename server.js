@@ -16,7 +16,7 @@ app.use(bodyParser.json());
 mongoose.Promise = global.Promise;
 // Connect to the Mongo DB
 mongoose.connect(
-  process.env.MONGODB_URI || "mongodb://localhost/reactreadinglist",
+  process.env.MONGODB_URI || "mongodb://localhost/nytsearch",
   {
     useMongoClient: true
   }
