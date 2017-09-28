@@ -1,4 +1,5 @@
 import React from 'react';
+import API from '../../utils/API';
 
 class Search extends React.Component {
      
@@ -15,6 +16,19 @@ class Search extends React.Component {
         });
       };
 
+    handleFormSearch = event => {
+        event.preventDefault();
+        if (this.state.topic && this.state.startYear && this.state.endYear) {
+            API.searchArticle({
+              title: this.state.topic,
+              author: this.state.startYear,
+              synopsis: this.state.endYear
+            })
+              .then(res => this.loadBooks())
+              .catch(err => console.log(err));
+        }
+    }
+
     render() {
     return (
         <div className="container searchContainer">
@@ -27,7 +41,8 @@ class Search extends React.Component {
                 <h5>End Year</h5>
                 <input className="searchInput" name="endYear" value={this.state.endYear} onChange={this.handleInputChange}></input>
                 <br></br>
-                <button className="searchButton">Search</button>
+                <button className="searchButton" disabled={!(this.state.topic && this.state.startYear && this.state.endYear)}
+                onClick={this.handleFormSearch}>Search</button>
             </div>
         </div>
         )

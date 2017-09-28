@@ -1,20 +1,27 @@
 import React from 'react';
 import { List, ListItem } from "../List";
 import DeleteBtn from '../DeleteBtn'
+import API from '../../utils/API'
 
 class Saved extends React.Component {
 
     state = {
-        books: []
+        articles: []
     }
+
+    deleteBook = id => {
+      API.deleteArticle(id)
+        .then(res => this.loadBooks())
+        .catch(err => console.log(err));
+    };
 
     render() {
     return (  
         <div className="container savedContainer">
             <div className="container searchHeader"><h4>Saved</h4></div>
-            {this.state.books.length ? (
+            {this.state.articles.length ? (
                 <List>
-                  {this.state.books.map(book => {
+                  {this.state.articles.map(book => {
                     return (
                       <ListItem key={book._id}>
                         <a href={"/books/" + book._id}>
@@ -22,7 +29,7 @@ class Saved extends React.Component {
                             {book.title} by {book.author}
                           </strong>
                         </a>
-                        <DeleteBtn onClick={() => this.saveArticle(book._id)} />
+                        <DeleteBtn onClick={() => this.deleteArticle(book._id)} />
                       </ListItem>
                     );
                   })}
