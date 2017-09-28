@@ -1,3 +1,53 @@
 .header {
-	border-bottom: 3px solid black
+	border-bottom: 3px solid black;
+	text-align: center;
+}
+.title {
+	text-decoration: underline;
+}
+.searchHeader {
+	border: 3px solid black;
+	text-align: center;
+	width: 100%;
+	margin: 15px 0 10px 0;	
+}
+.searchContainer {
+	width: 60%;
+	margin: 15px 20% 20px 20%;
+	border: 3px solid black;
+	text-align: center;
+}
+.resultContainer {
+	width: 60%;
+	margin: 15px 20% 20px 20%;
+	border: 3px solid black;
+}
+.savedContainer {
+	width: 60%;
+	margin: 15px 20% 150px 20%;
+	border: 3px solid black;
+}
+.searchInput {
+	width: 60%;
+	margin-bottom: 10px
+}
+.searchButton {
+	margin: 0 0 15px 0 ;
+	padding: 5px 40px;
+}
+.saveButton {
+	display: inline-block;	
+}
+.articleTitle {
+	width: 90%;
+	display: inline-block;	
+}
+.footer {
+	border: 3px solid black;
+	height: 10%;
+	width: 100%;
+	position: fixed;
+	bottom: 0;
+	z-index: 1;
+	background-color: white;
 }
