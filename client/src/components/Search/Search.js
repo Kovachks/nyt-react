@@ -1,9 +1,12 @@
 import React from 'react';
-import API from '../../utils/API';
+import { List, ListItem } from "../List";
+import DeleteBtn from '../DeleteBtn'
+import API from "../../utils/API"
 
 class Search extends React.Component {
      
     state = {
+        articles: [],
         topic: "",
         startYear: "",
         endYear: ""
@@ -16,18 +19,19 @@ class Search extends React.Component {
         });
       };
 
-    handleFormSearch = event => {
+      handleFormSubmit = event => {
         event.preventDefault();
         if (this.state.topic && this.state.startYear && this.state.endYear) {
-            API.searchArticle({
-              title: this.state.topic,
-              author: this.state.startYear,
-              synopsis: this.state.endYear
-            })
-              .then(res => this.loadBooks())
-              .catch(err => console.log(err));
+          API.searchArticle(
+            this.state.topic,
+            this.state.startYear,
+            this.state.endYear
+          )
+            .then(res => {this.setState({articles: res.data.response.docs})
+        })
+            .catch(err => console.log(err));
         }
-    }
+      };
 
     render() {
     return (
@@ -41,11 +45,28 @@ class Search extends React.Component {
                 <h5>End Year</h5>
                 <input className="searchInput" name="endYear" value={this.state.endYear} onChange={this.handleInputChange}></input>
                 <br></br>
-                <button className="searchButton" disabled={!(this.state.topic && this.state.startYear && this.state.endYear)}
-                onClick={this.handleFormSearch}>Search</button>
+                <button className="searchButton" onClick={this.handleFormSubmit}>Search</button>
+            </div>
+            <div className="container resultContainer">
+                <div className="container searchHeader"><h4>Results</h4></div>
+                {this.state.articles.length ? (
+                    <List>
+                      {this.state.articles.map(article => (
+
+                          <ListItem key={article.pub_date}>
+                            <h3>{article.headline.main}</h3>
+                            <a href={article.web_url}>{article.web_url} </a>
+                            <h3>{article.pub_date}</h3>
+                            <DeleteBtn onClick={() => this.deleteBook(article._id)} />
+                          </ListItem>
+                      ))}
+                    </List>
+                  ) : (
+                    <h3>No Results to Display</h3>
+                  )}
             </div>
         </div>
-        )
+    )    
     }
 };
 

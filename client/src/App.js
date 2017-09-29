@@ -4,7 +4,6 @@ import {BrowserRouter as Router, Route} from 'react-router-dom';
 import Main from './components/Main/Main'
 import Home from './pages/home/Home'
 import Search from './components/Search/Search'
-import Results from './components/Search/Results'
 import Saved from './components/Saved/Saved'
 import Footer from './components/Footer/Footer'
 
