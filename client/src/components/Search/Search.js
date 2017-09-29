@@ -19,6 +19,21 @@ class Search extends React.Component {
         });
       };
 
+      saveArticle = event => {
+          API.saveArticle(event)
+          .then(res => this.loadSavedArticles())
+          .catch(err => console.log(err));
+      };
+
+      loadSavedArticles = () => {
+          API.getSavedArticles()
+          .then(
+              res => {
+                  this.setState({savedarticles: res.data})
+              })
+              .catch(err => console.log(err))
+      }
+
       handleFormSubmit = event => {
         event.preventDefault();
         if (this.state.topic && this.state.startYear && this.state.endYear) {
@@ -57,7 +72,9 @@ class Search extends React.Component {
                             <h3>{article.headline.main}</h3>
                             <a href={article.web_url}>{article.web_url} </a>
                             <h3>{article.pub_date}</h3>
-                            <DeleteBtn onClick={() => this.deleteBook(article._id)} />
+                            <DeleteBtn id="articleInfo" type="submit" onClick={() => this.saveArticle({title: article.headline.main,
+                                                                        url: article.web_url,
+                                                                        date: article.pub_date})} />
                           </ListItem>
                       ))}
                     </List>

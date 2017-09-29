@@ -48,7 +48,6 @@ class App extends Component {
         <div>
           <Main/>
           <Search/>
-          <Results/>
           <Saved/>
           <Footer/>
         </div>

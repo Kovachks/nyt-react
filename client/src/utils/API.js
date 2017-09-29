@@ -8,5 +8,12 @@ export default {
     query += "&begin_date=" + startYear + "0101";
     query += "&end_date=" + endYear + "1231"
     return axios.get(BASEURL + query + APIKEY)
+  },
+
+  saveArticle: function(articleInfo) {
+    return axios.post("/api/articles", articleInfo)
+  },
+  getSavedArticles: function(articleInfo) {
+    return axios.get("api/articles", articleInfo)
   }
 };
